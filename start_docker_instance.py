@@ -53,6 +53,7 @@ def main():
         if container.status == "exited":
             print(f"starting container")
             container.start()
+            connect_to_container(name)
         elif container.status == "running":
             connect_to_container(name)
     elif containers_len == 0:
