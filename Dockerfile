@@ -6,6 +6,7 @@ ARG DEBIAN_FRONTEND=noninteractive
 ENV TZ=America/New_York
 RUN apt install -y \
             software-properties-common \
+            tree \
             vim \
             wget \
             curl \
