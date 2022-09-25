@@ -12,6 +12,11 @@ RUN apt install -y \
             curl \
             zsh \
             git
+RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_release -cs` main" > /etc/apt/sources.list.d/gazebo-stable.list
+RUN wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
+RUN apt update -y
+RUN apt install gazebo libgazebo-dev ros-humble-gazebo-ros-pkgs python3-pip -y
+RUN pip3 install transforms3d
 RUN wget -nv -O - https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 RUN wget https://gist.githubusercontent.com/saikrn112/b55bf8a8bad6f6538a40561bdafe45bc/raw/.vimrc
 RUN wget -O - https://gist.githubusercontent.com/saikrn112/1e353283a091824bb0074c7aafe203fe/raw/zimrc-components >> .zimrc

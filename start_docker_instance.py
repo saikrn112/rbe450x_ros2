@@ -7,20 +7,23 @@ import docker
 #below command is from document https://docker-py.readthedocs.io/en/stable/containers.html
 ENV_HOME = os.environ["HOME"]
 ENV_USER = os.environ["USER"]
+ENV_DISPLAY = os.environ["DISPLAY"]
 
 def create_docker_instance(name,args):
     options = ""
     if args.rm:
         options += " --rm "
     if args.it:
-        options += " -it"
+        options += " -it "
+    if args.display:
+        options += f" --gpus all --privileged -e DISPLAY={ENV_DISPLAY} --net=host -v /tmp/.X11-unix/:/tmp/.X11-unix/ "
     print(f"Creating {name} instance")
     if platform == "linux" or platform == "linux2":
         vision_based_volume = f"{ENV_HOME}/Personal/vision_based_manipulation_rbe450x/"
     elif platform == "darwin":
         vision_based_volume = f"{ENV_HOME}/Personal/WPI/semester_1/vision_based_manipulation/"
 
-    cmd= f"docker run {options} --name {name} -v {vision_based_volume}:/root/vision_based_manipulation/ somidi/ros-rbe450x:v1 /usr/bin/zsh"
+    cmd= f"docker run --name {name} {options} -v {vision_based_volume}:/root/vbm/ somidi/ros-rbe450x:v1 /usr/bin/zsh"
     print(cmd)
     os.system(cmd)
 
@@ -37,6 +40,7 @@ def main():
     parser.add_argument( "--rm",action='store_true',help="remove container on exit")
     parser.add_argument( "--it",action='store_true',help="interactive mode")
     parser.add_argument( "--name",default="rbe450x",help="interactive mode")
+    parser.add_argument( "--display",action='store_true',help="interactive mode")
     args = parser.parse_args()
 
     name = args.name
