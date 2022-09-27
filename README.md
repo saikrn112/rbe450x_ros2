@@ -1,6 +1,6 @@
 ## Docker image for REB450x
 
-This dockerimage is for ROS2 and gazebo image, by default it tries to attach my workspace directory. You can attach your own workspace by passing appropriate flags in the launch script (more on this below)
+This dockerfile repo is for ROS2 and gazebo image, by default it tries to attach my workspace directory. You can attach your own workspace by passing appropriate flags in the launch script (more on this below)
 
 To run:
 * install docker from [here](https://docs.docker.com/engine/install/)
