@@ -25,14 +25,16 @@ def create_docker_instance(name,args):
 
     cmd= f"docker run --name {name} {options} -v {vision_based_volume}:/root/vbm/ somidi/ros-rbe450x:v1 /usr/bin/zsh"
     print(cmd)
-    os.system(cmd)
+    if not args.dry_run:
+        os.system(cmd)
 
-def connect_to_container(name):
+def connect_to_container(name,args):
     print(f"found runing {name} container, attaching to it's zsh")
     #container.exec_run(cmd="zsh",user=ENV_HOME,workdir="/root/vision_based_manipulation/")
     cmd = f"docker exec -it {name} zsh"
     print(cmd)
-    os.system(cmd)
+    if not args.dry_run:
+        os.system(cmd)
 
 def main():
     parser = argparse.ArgumentParser(description='start docker instance')
@@ -41,6 +43,7 @@ def main():
     parser.add_argument( "--it",action='store_true',help="interactive mode")
     parser.add_argument( "--name",default="rbe450x",help="interactive mode")
     parser.add_argument( "--display",action='store_true',help="interactive mode")
+    parser.add_argument( "--dry_run",action='store_true',help="interactive mode")
     args = parser.parse_args()
 
     name = args.name
@@ -57,9 +60,9 @@ def main():
         if container.status == "exited":
             print(f"starting container")
             container.start()
-            connect_to_container(name)
+            connect_to_container(name,args)
         elif container.status == "running":
-            connect_to_container(name)
+            connect_to_container(name,args)
     elif containers_len == 0:
         create_docker_instance(name,args)
 
