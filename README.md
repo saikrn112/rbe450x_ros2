@@ -21,6 +21,8 @@ python ./start_docker_instance.py
 ```
 python ./start_docker_instance.py --help
 ```
+
+Following are some of the help options 
 * for custom container name `--name <name_you_want>` 
 * for interactive shell `--it` 
 * for attaching your own volume `--workspace <absolute_path_to_your_ws>` 
