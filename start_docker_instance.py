@@ -16,6 +16,7 @@ def create_docker_instance(name,args):
     if args.it:
         options += " -it "
     if args.display:
+        os.system("xhost local:root")
         options += f" --gpus all --privileged -e DISPLAY={ENV_DISPLAY} --net=host -v /tmp/.X11-unix/:/tmp/.X11-unix/ "
 
     print(f"Creating {name} instance")
