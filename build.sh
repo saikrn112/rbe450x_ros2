@@ -1,1 +1,1 @@
-docker build -t somidi/ros-rbe450x:v1 .
+docker build -t somidi/ros-rbe450x:v2 .

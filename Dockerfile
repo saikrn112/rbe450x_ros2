@@ -1,5 +1,5 @@
 ## ROS2
-FROM osrf/ros:humble-desktop
+FROM osrf/ros:humble-desktop-full
 WORKDIR /root
 RUN apt update -y
 ARG DEBIAN_FRONTEND=noninteractive
@@ -18,8 +18,8 @@ RUN echo "deb http://packages.osrfoundation.org/gazebo/ubuntu-stable `lsb_releas
 RUN wget https://packages.osrfoundation.org/gazebo.key -O - | apt-key add -
 RUN apt update -y
 # HW3
-RUN apt install gazebo \
-            libgazebo-dev \
+RUN apt install gazebo libgazebo-dev -y
+RUN apt install \
             ros-humble-gazebo-ros-pkgs \
             ros-humble-ros2-control \
             ros-humble-ros2-controllers \
