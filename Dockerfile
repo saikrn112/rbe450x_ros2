@@ -27,10 +27,12 @@ RUN apt install gazebo \
             ros-humble-xacro \
             ros-humble-joint-state-publisher \
             ros-humble-joint-state-publisher-gui \
+            ros-humble-tf2-tools \
+            ros-humble-tf-transformations \
             ros-humble-image-view \
             libcanberra-gtk3-module \
             python3-pip -y
-RUN pip3 install transforms3d
+RUN pip3 install opencv-python transforms3d
 
 RUN wget -nv -O - https://raw.githubusercontent.com/zimfw/install/master/install.zsh | zsh
 RUN wget https://gist.githubusercontent.com/saikrn112/b55bf8a8bad6f6538a40561bdafe45bc/raw/.vimrc
